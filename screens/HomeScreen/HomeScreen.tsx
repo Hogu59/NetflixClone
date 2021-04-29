@@ -5,20 +5,16 @@ import { Text, View } from '../../components/Themed';
 
 import styles from './styles';
 import categories from '../../assets/data/categories';
-
-const firstCategory = categories.items[0];
+import HomeCategory from '../../components/HomeCategory';
 
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
-        <Text style={styles.title}>Popular on Netflix</Text>
-        <FlatList
-            data={firstCategory.movies}
-            renderItem={({item}) => (
-                <Image style={styles.image} source={{ uri: item.poster}}/>
-            )}
-            horizontal
-        />
+      {/* List of categories */}
+      <FlatList
+          data={categories.items}
+          renderItem={({item}) => <HomeCategory  category={item}/>} 
+      />
     </View>
   );
 }
