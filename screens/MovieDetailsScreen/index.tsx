@@ -19,7 +19,7 @@ const MovieDetailsScreen = () => {
             <FlatList
                 data={firstSeason.episodes.items}
                 renderItem={({ item }) => <EpisodeItem episode={item} />}
-                style={{ marginBottom: 250}}
+                style={{ marginBottom: 250 }}
                 ListHeaderComponent={(
                     <View style={{ padding: 12 }}>
                         <Text style={styles.title}>{movie.title}</Text>
