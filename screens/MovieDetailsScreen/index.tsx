@@ -1,23 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View } from '../../components/Themed';
 import { Image, Pressable, FlatList } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import styles from './styles';
 import { MaterialIcons, Entypo, AntDesign, Feather, FontAwesome } from '@expo/vector-icons';
 
 import movie from '../../assets/data/movie';
 import EpisodeItem from '../../components/EpisodeItem/index';
+import { forModalPresentationIOS } from '@react-navigation/stack/lib/typescript/src/TransitionConfigs/CardStyleInterpolators';
 
 const firstSeason = movie.seasons.items[0];
 const firstEpisode = firstSeason.episodes.items[0];
 
 const MovieDetailsScreen = () => {
+    const [currentSeason, setCurrentSeason] = useState(firstSeason) 
+
+    const seasonNames = movie.seasons.items.map(season => season.name)
+
     return (
         <View>
             <Image style={styles.image} source={{ uri: firstEpisode.poster }} />
 
 
             <FlatList
-                data={firstSeason.episodes.items}
+                data={currentSeason.episodes.items}
                 renderItem={({ item }) => <EpisodeItem episode={item} />}
                 style={{ marginBottom: 250 }}
                 ListHeaderComponent={(
@@ -70,6 +76,20 @@ const MovieDetailsScreen = () => {
                                 <Text style={{ color: 'darkgrey', marginTop: 5 }}>Share</Text>
                             </View>
                         </View>
+
+                        <Picker
+                            selectedValue={currentSeason.name}
+                            onValueChange={(itemValue, itemIndex) => {
+                                setCurrentSeason(movie.seasons.items[itemIndex])
+                            }}
+                            style={{ color: 'white', width: 140 }}
+                            dropdownIconColor={'white'}
+                            >
+                            {seasonNames.map(seasonName => (
+                                <Picker.Item label={seasonName} value={seasonName} key={seasonName} />
+                            ))}
+                        </Picker>
+
                     </View>
                 )}
             />
