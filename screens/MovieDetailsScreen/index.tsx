@@ -5,7 +5,7 @@ import styles from './styles';
 import { MaterialIcons, Entypo, AntDesign, Feather, FontAwesome } from '@expo/vector-icons';
 
 import movie from '../../assets/data/movie';
-import EpisodeItem from '../../components/EpisodeItem/intex';
+import EpisodeItem from '../../components/EpisodeItem/index';
 
 const firstSeason = movie.seasons.items[0];
 const firstEpisode = firstSeason.episodes.items[0];
